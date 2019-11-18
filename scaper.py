@@ -18,7 +18,7 @@ def emailFunction(CLList):
 
     sender_email = 'mgdevtest@gmail.com'
     receiver_email = 'mgordon25@gmail.com'
-    gmail_password = ''
+    gmail_password = 'fvfu3533'
 
     message = MIMEMultipart("alternative")
     message["Subject"] = "multipart test"
@@ -33,7 +33,7 @@ def emailFunction(CLList):
     Subject: 
 
 
-    """ #%(sent_from, ", ".join(to), subject, body)
+    """ 
 
     #html = """\
 
@@ -87,29 +87,39 @@ def emailFunction(CLList):
 #  format links
 
 
-if os.path.exists('search_results.txt'):
-    os.remove('search_results.txt')
+if os.path.exists('search_results.html'):
+    os.remove('search_results.html')
 cl = CraigslistHousing(site='sfbay', area=ss.CRAIGSLIST_SUB, category='apa', filters={'max_price': 3000, 'min_price': 2000})
 
 results = []
 results = cl.get_results(sort_by='newest', geotagged=True, limit=20)
 
+
+
 print(type(results))
 lineList = list()
     
-#for result in result#    search_results = open('search_results.txt', 'a+')
-#    search_results.write(result["url"] + "\n")
+for result in results:
+    search_results = open('search_results.html', 'a+')
+    search_results.write(result["url"] + "\n")
+
+print(str(search_results)   )
+
+
+
     
-#lineList = [line.rstrip('\n') for line in open('search_results.txt')]
+lineList = [line.rstrip('\n') for line in open('search_results.html')]
+
+
 
 for result in results:
     lineList.append(result["url"])
     
-print(type(lineList))
+#print(type(lineList))
 
-for line in lineList:
+#for line in lineList:
     
-    print(line)
+#    print(line)
 
 
-emailFunction(lineList)
+emailFunction('\r\n'.join(lineList))
